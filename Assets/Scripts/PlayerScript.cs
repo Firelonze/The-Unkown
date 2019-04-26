@@ -7,12 +7,10 @@ public class PlayerScript : MonoBehaviour
     
     public float speed;
     public float floatHeight;
-    public GameObject coin;
     private Vector3 originalPos;
     private Vector3 currentPos;
     private Vector3 initialPosition;
     private Rigidbody2D rb;
-    private Rigidbody2D Coin;
     private Rigidbody2D Spike;
     private Rigidbody2D BolT;
     private SpriteRenderer mySpriteRenderer;
@@ -22,7 +20,6 @@ public class PlayerScript : MonoBehaviour
         currentPos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
         originalPos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z); 
         rb = GetComponent<Rigidbody2D>();
-        Coin = coin.GetComponent<Rigidbody2D>();
         mySpriteRenderer = GetComponent<SpriteRenderer>();
         initialPosition = transform.position;
     }
@@ -80,10 +77,6 @@ public class PlayerScript : MonoBehaviour
         if (collision.gameObject.name == "BolTrap")
         {
             gameObject.transform.position = originalPos;
-        }
-        if (collision.gameObject.name == "coin")
-        {
-            Coin.mass = 10;
         }
         if (collision.gameObject.tag == "Spike" && collision.gameObject.name == "BolTrap" && collision.gameObject.tag == "Lowest Barier")
         {
