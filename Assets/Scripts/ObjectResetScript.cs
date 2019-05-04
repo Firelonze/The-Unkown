@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class ObjectResetScript : MonoBehaviour
 {
     public GameObject Player;
     private Vector3 originalPos;

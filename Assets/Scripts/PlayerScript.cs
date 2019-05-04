@@ -1,16 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour
 {
     
     public float speed;
     public float floatHeight;
+    public GameObject PlatformTrap;
+    public GameObject Cloud;
     private Vector3 originalPos;
     private Vector3 currentPos;
     private Vector3 initialPosition;
     private Rigidbody2D rb;
+    private Rigidbody2D rb2d;
+    private Rigidbody2D rb2dF;
     private Rigidbody2D Spike;
     private Rigidbody2D BolT;
     private SpriteRenderer mySpriteRenderer;
@@ -20,6 +25,8 @@ public class PlayerScript : MonoBehaviour
         currentPos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
         originalPos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z); 
         rb = GetComponent<Rigidbody2D>();
+        rb2d = PlatformTrap.GetComponent<Rigidbody2D>();
+        rb2dF = Cloud.GetComponent<Rigidbody2D>();
         mySpriteRenderer = GetComponent<SpriteRenderer>();
         initialPosition = transform.position;
     }
@@ -38,7 +45,11 @@ public class PlayerScript : MonoBehaviour
                 mySpriteRenderer.flipX = true;
             }
         }
-        //if(gameObject.transform.position = originalPos) { }
+       /* if (gameObject.transform.position == originalPos)
+        {
+            string currentSceneName = SceneManager.GetActiveScene().name;
+            SceneManager.LoadScene(currentSceneName);
+        }*/
     }
     void FixedUpdate()
     {
@@ -49,9 +60,8 @@ public class PlayerScript : MonoBehaviour
             float heightError = floatHeight - distance;
             if (Input.GetKey(KeyCode.Space) && distance <= 1.3||Input.GetKey(KeyCode.UpArrow) && distance <= 1.3||Input.GetKey(KeyCode.W) && distance <= 1.3)
             {
-                rb.AddForce(transform.up * 1750);
+                rb.AddForce(transform.up * 1700);
             }
-
         }
     }
     void OnCollisionEnter2D(Collision2D collision)
@@ -60,14 +70,14 @@ public class PlayerScript : MonoBehaviour
         {
             gameObject.transform.position = originalPos;
         }
-        /*if (collision.gameObject.tag == "CoinT")
+        if (collision.gameObject.tag == "CoinT")
         {
             rb2d.mass = 1;
         }
         if (collision.gameObject.name == "CloudF")
         {
             rb2dF.mass = 1;
-        }*/
+        }
         if (collision.gameObject.tag == "Spike")
         {
             //spikeAppear();
@@ -78,9 +88,10 @@ public class PlayerScript : MonoBehaviour
         {
             gameObject.transform.position = originalPos;
         }
-        if (collision.gameObject.tag == "Spike" && collision.gameObject.name == "BolTrap" && collision.gameObject.tag == "Lowest Barier")
+        if (collision.gameObject.tag == "Spike" || collision.gameObject.name == "BolTrap" || collision.gameObject.tag == "Lowest Barier")
         {
-            
+            string currentSceneName = SceneManager.GetActiveScene().name;
+            SceneManager.LoadScene(currentSceneName);
         }
     }
     /*private void OnGUI()
