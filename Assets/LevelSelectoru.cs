@@ -11,4 +11,8 @@ public class LevelSelectoru : MonoBehaviour
     {
         SceneManager.LoadScene("IntroDuction", LoadSceneMode.Single);
     }
+    public void LoadHelp()
+    {
+        SceneManager.LoadScene("Help", LoadSceneMode.Single);
+    }
 }
