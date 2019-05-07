@@ -5,7 +5,7 @@ using UnityEngine;
 public class ObjectResetScript : MonoBehaviour
 {
     public GameObject Player;
-    private Vector3 originalPos;
+    //private Vector3 originalPos;
 
     // Start is called before the first frame update
     void Start()
@@ -20,9 +20,9 @@ public class ObjectResetScript : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name == "BolTrap")
-        {
-            gameObject.transform.position = originalPos;
-        }
+      //  if (collision.gameObject.name == "BolTrap")
+       // {
+         //   gameObject.transform.position = originalPos;
+       // }
     }
 }

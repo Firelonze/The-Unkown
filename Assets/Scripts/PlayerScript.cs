@@ -10,6 +10,9 @@ public class PlayerScript : MonoBehaviour
     public float floatHeight;
     public GameObject PlatformTrap;
     public GameObject Cloud;
+    public Scene Level1;
+    public Scene IntroDuction;
+    public Scene Finish;
     private Vector3 originalPos;
     private Vector3 currentPos;
     private Vector3 initialPosition;
@@ -57,6 +60,7 @@ public class PlayerScript : MonoBehaviour
         if (hit.collider != null)
         {
             float distance = ((Vector3)hit.point - transform.position).magnitude;
+            Debug.Log(distance);
             float heightError = floatHeight - distance;
             if (Input.GetKey(KeyCode.Space) && distance <= 1.3||Input.GetKey(KeyCode.UpArrow) && distance <= 1.3||Input.GetKey(KeyCode.W) && distance <= 1.3)
             {
@@ -90,8 +94,19 @@ public class PlayerScript : MonoBehaviour
         }
         if (collision.gameObject.tag == "Spike" || collision.gameObject.name == "BolTrap" || collision.gameObject.tag == "Lowest Barier")
         {
-            string currentSceneName = SceneManager.GetActiveScene().name;
-            SceneManager.LoadScene(currentSceneName);
+            SceneManager.LoadScene("DeathScreen", LoadSceneMode.Single);
+        }
+        if (collision.gameObject.name == "DoorLevel1")
+        {
+            SceneManager.LoadScene("Level1", LoadSceneMode.Single);
+        }
+        if (collision.gameObject.name == "DoorLevel2")
+        {
+            SceneManager.LoadScene("Finish", LoadSceneMode.Single);
+        }
+        if (collision.gameObject.name == "Platform")
+        {
+            SceneManager.LoadScene("EndScreen", LoadSceneMode.Single);
         }
     }
     /*private void OnGUI()
